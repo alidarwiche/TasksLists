@@ -8,13 +8,14 @@
 
 import UIKit
 
-class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    
     var tasks: [String] = ["We", "Heart", "Swift"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "taskCell")
     }
 
@@ -27,17 +28,13 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         return self.tasks.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell") as TaskTableViewCell
+        let cell:TaskTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell") as! TaskTableViewCell
         
-        cell.taskTextField?.text = self.tasks[indexPath.row]
+        cell.textField?.text = self.tasks[indexPath.row]
         
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        return cell
     }
     
     /*
